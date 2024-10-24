@@ -1,7 +1,7 @@
 # 4builder
 
-If you are impatient like me to test the new features of the wonderful projects of **a2_4am** and **qkumba** (over [there](https://github.com/a2-4am?tab=repositories)), this builder is for you.
-Run one of the commands below and you get a container image with the `HDV`/`DSK`/`PO` corresponding to the root. All you have to do is extract it and enjoy it !!
+If you are impatient like me to test the new features of the wonderful projects of **a2_4am** and **qkumba** (over [there](https://github.com/a2-4am?tab=repositories)) before the official release, this builder is for you.
+Run one of the commands below and after one minute or two you get a container image with the `HDV`/`DSK`/`PO` corresponding at the root of it. All you have to do is extract the file and enjoy it !!
 
 ```shell
 podman build --build-arg REPOSITORY=4cade --build-arg IMAGE=4cade.hdv -t 4cade .
