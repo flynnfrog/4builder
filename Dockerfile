@@ -65,4 +65,4 @@ RUN mkdir -p ${MOUNT_POINT}
 
 COPY --from=builder "/tmp/${IMAGE}" /
 
-CMD ["sh", "-c", "mkdir -p ${MOUNT_POINT}/build && cp -f /${IMAGE_FILE} ${MOUNT_POINT}/build/ && echo \"${IMAGE_FILE} copied.\"" ]
+CMD ["sh", "-c", "mkdir -p ${MOUNT_POINT}/build && cp -f \"/${IMAGE_FILE}\" ${MOUNT_POINT}/build/ && echo \"${IMAGE_FILE} copied.\"" ]
