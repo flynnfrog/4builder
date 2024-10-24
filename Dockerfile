@@ -1,4 +1,6 @@
-FROM debian:bookworm-slim AS builder
+ARG DEBIAN_VERSION=bookworm-slim
+
+FROM debian:${DEBIAN_VERSION} AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -53,6 +55,14 @@ RUN ${BEFORE_CMD} \
     && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf ${REPOSITORY}
 
-FROM scratch
+FROM debian:${DEBIAN_VERSION}
+
+ARG IMAGE
+ENV IMAGE_FILE=${IMAGE}
+ENV MOUNT_POINT=/mnt/output
+
+RUN mkdir -p ${MOUNT_POINT} 
 
 COPY --from=builder "/tmp/${IMAGE}" /
+
+CMD ["sh", "-c", "mkdir -p ${MOUNT_POINT}/build && cp -f /${IMAGE_FILE} ${MOUNT_POINT}/build/ && echo \"${IMAGE_FILE} copied.\"" ]
