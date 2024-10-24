@@ -1,7 +1,2 @@
 #.dockerignore 
-.git
-build
-compose.yaml
-etc
-LICENSE
-README.md
+*
