@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim AS builder
+FROM debian:bookworm-slim AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -7,7 +7,7 @@ RUN apt-get update \
         acme \
         build-essential \
         ca-certificates \
-        default-jre \
+        default-jre-headless \
         git \
         parallel \
         python3 \
@@ -15,6 +15,7 @@ RUN apt-get update \
         sudo \
         unzip \
         xxd \
+    && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/acme /usr/local/bin/acme \
     && echo "#!/bin/sh" > /usr/local/bin/osascript \
     && echo "echo NOP osascript" >> /usr/local/bin/osascript \
@@ -53,8 +54,5 @@ RUN ${BEFORE_CMD} \
     && rm -rf ${REPOSITORY}
 
 FROM scratch
-
-ARG IMAGE
-ARG REPOSITORY
 
 COPY --from=builder "/tmp/${IMAGE}" /
