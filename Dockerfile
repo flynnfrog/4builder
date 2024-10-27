@@ -1,15 +1,14 @@
-ARG DEBIAN_VERSION=bookworm-slim
+ARG ALPINE_VERSION=3.20.3
 
-FROM debian:${DEBIAN_VERSION} AS builder
+FROM alpine:${ALPINE_VERSION} AS builder
 
-ARG DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \ 
-        acme \
-        build-essential \
+RUN apk add --update-cache \
+        bash \
+        build-base \
+        findutils \
+        gcc \
         ca-certificates \
-        default-jre-headless \
+        openjdk17-jre-headless \
         git \
         parallel \
         python3 \
@@ -17,11 +16,15 @@ RUN apt-get update \
         sudo \
         unzip \
         xxd \
-    && rm -rf /var/lib/apt/lists/* \
-    && ln -s /usr/bin/acme /usr/local/bin/acme \
+    && rm -rf /var/cache/apk/* \
     && echo "#!/bin/sh" > /usr/local/bin/osascript \
     && echo "echo NOP osascript" >> /usr/local/bin/osascript \
     && chmod +x /usr/local/bin/osascript
+
+RUN git clone -b main https://github.com/visrealm/acme.git \
+    && cd acme/src \
+    && make install \
+    && rm -rf /acme
 
 ADD https://api.bitbucket.org/2.0/repositories/magli143/exomizer/commits/master exomizer-version.json
 
@@ -55,7 +58,7 @@ RUN ${BEFORE_CMD} \
     && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf ${REPOSITORY}
 
-FROM debian:${DEBIAN_VERSION}
+FROM alpine:${ALPINE_VERSION}
 
 ARG IMAGE
 ENV IMAGE_FILE=${IMAGE}
