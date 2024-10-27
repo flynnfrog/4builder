@@ -7,11 +7,11 @@ RUN apk add --update-cache \
         gcc \
         ca-certificates \
         openjdk17-jre-headless \
-        git \
+        git \ 
         parallel \
         python3 \
         rsync \
-        sudo \
+        sed \
         unzip \
         xxd \
     && rm -rf /var/cache/apk/* \

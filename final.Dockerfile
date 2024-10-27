@@ -1,7 +1,8 @@
 FROM 4builder as builder
 LABEL stage=4builder
 
-ARG BEFORE_CMD=echo NOP
+ARG AFTER_CMD=ZWNobyBOT1A=
+ARG BEFORE_CMD=ZWNobyBOT1A=
 ARG BRANCH=main
 ARG IMAGE
 ARG REPOSITORY
@@ -9,9 +10,10 @@ ARG TARGET
 
 ADD https://api.github.com/repos/a2-4am/${REPOSITORY}/git/refs/heads/${BRANCH} ${REPOSITORY}-version.json
 
-RUN ${BEFORE_CMD} \
+RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && git clone -b ${BRANCH} https://github.com/a2-4am/${REPOSITORY}.git \
     && cd ${REPOSITORY} \
+    && eval `echo ${AFTER_CMD} | base64 -d `\
     && chmod 755 bin/* || : \
     && make ${TARGET} \
     && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
