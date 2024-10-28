@@ -11,7 +11,7 @@ ARG TARGET
 ADD https://api.github.com/repos/a2-4am/${REPOSITORY}/git/refs/heads/${BRANCH} ${REPOSITORY}-version.json
 
 RUN eval `echo ${BEFORE_CMD} | base64 -d `\
-    && git clone -b ${BRANCH} https://github.com/a2-4am/${REPOSITORY}.git \
+    && git clone --progress --verbose -b ${BRANCH} https://github.com/a2-4am/${REPOSITORY}.git \
     && cd ${REPOSITORY} \
     && eval `echo ${AFTER_CMD} | base64 -d `\
     && chmod 755 bin/* || : \
