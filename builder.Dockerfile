@@ -1,13 +1,15 @@
-FROM debian:bookworm-slim
+FROM debian:stable-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \ 
-        build-essential \
         ca-certificates \
         default-jre-headless \
+        gcc \
         git \
+        libc6-dev \
+        make \
         parallel \
         python3 \
         rsync \

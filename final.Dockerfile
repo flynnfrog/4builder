@@ -14,7 +14,7 @@ RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && git clone --progress --verbose -b ${BRANCH} https://github.com/a2-4am/${REPOSITORY}.git \
     && cd ${REPOSITORY} \
     && eval `echo ${AFTER_CMD} | base64 -d `\
-    && chmod 755 bin/* || : \
+    && chmod +x bin/* || : \
     && make ${TARGET} \
     && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf /${REPOSITORY}
