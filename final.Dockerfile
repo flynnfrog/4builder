@@ -19,7 +19,7 @@ RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf /${REPOSITORY}
 
-FROM alpine:3.20.3
+FROM busybox:1.37-uclibc
 LABEL stage=4final
 
 ARG IMAGE
