@@ -8,7 +8,7 @@ ARG IMAGE
 ARG REPOSITORY
 ARG TARGET
 
-ADD https://api.github.com/repos/a2-4am/${REPOSITORY}/git/refs/heads/${BRANCH} ${REPOSITORY}-version.json
+ADD https://api.github.com/repos/a2-4am/${REPOSITORY}/git/refs/heads/${BRANCH} /var/cache/${REPOSITORY}-version.json
 
 RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && git clone --progress --verbose -b ${BRANCH} https://github.com/a2-4am/${REPOSITORY}.git \
