@@ -16,7 +16,7 @@ RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && eval `echo ${AFTER_CMD} | base64 -d `\
     && chmod +x bin/* || : \
     && make ${TARGET} \
-    && cp "/${REPOSITORY}/build/${IMAGE}" "/tmp/${IMAGE}" \
+    && cp "build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf /${REPOSITORY}
 
 FROM busybox:1.37-uclibc
