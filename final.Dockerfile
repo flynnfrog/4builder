@@ -15,6 +15,7 @@ RUN eval `echo ${BEFORE_CMD} | base64 -d `\
     && cd ${REPOSITORY} \
     && eval `echo ${AFTER_CMD} | base64 -d `\
     && chmod +x bin/* || : \
+	&& sed -i '1s/^/SHELL := \/bin\/bash \n/' Makefile \
     && make ${TARGET} \
     && cp "build/${IMAGE}" "/tmp/${IMAGE}" \
     && rm -rf /${REPOSITORY}
