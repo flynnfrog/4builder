@@ -12,4 +12,4 @@ podman run --rm --mount "src=$(pwd),target=/mnt/output,type=bind" $PROJECT
 podman image prune -a -f --filter label=stage=4final
 ```
 
-Possible values for `PROJECT`: `4cade`, `4live`, `4sports`, `a2fc`, `adventure-replay`, `anti-m`, `cover`, `dhrslide`, `fonts`, `million-perfect-letters`, `million-perfect-tiles`, `passport`, `pitch-dark`, `pitch-darker`, `probable`, `untitled-word-game`, `untitled-word-game-pro`, `wizard-replay`, `word-clock`.
+Possible values for `PROJECT`: `4cade`, `4live`, `4print`, `4sports`, `a2fc`, `adventure-replay`, `anti-m`, `cover`, `dhrslide`, `fonts`, `million-perfect-letters`, `million-perfect-tiles`, `passport`, `pitch-dark`, `pitch-darker`, `probable`, `untitled-word-game`, `untitled-word-game-pro`, `wizard-replay`, `word-clock`.
